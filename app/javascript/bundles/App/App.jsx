@@ -1,51 +1,114 @@
-import React from 'react'
-import * as ProductsAPI from './ProductsAPI'
-import { Route } from 'react-router-dom'
-import Search from './containers/Search'
-import ProductList from './containers/ProductList'
+// @flow
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+import ProductList from "./containers/ProductList";
+import CartPopup from "./containers/CartPopup";
+import AlertContainer from "react-alert";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
+import { ProductType } from "./types";
+import { normalizeById } from "./helpers";
 
-const normalizeProducts = (products) => {
-  let normalizedProducts = {};
-  products.forEach(product => normalizedProducts[product.id] = product)
-  return normalizedProducts
-}
+type Props = {
+  products: Array<ProductType>,
+  recomentation: { [number]: Array<number> },
+};
 
-class ProductsApp extends React.Component {
-  state = {products: undefined}
+class App extends Component<Pros> {
+  state = { products: {}, cart: {}, isCartOpen: false };
 
-  componentDidMount() {
-    ProductsAPI.getAll().then(products => {
-      this.setState({ products: normalizeProducts(products) })
-    })
+  alertOptions = {
+    offset: 3,
+    position: "top right",
+    theme: "light",
+    time: 3000,
+    transition: "scale",
+  };
+
+  showAlert = (msg, type) => this.msg.show(msg, { type });
+
+  componentWillMount() {
+    this.setState({ products: normalizeById(this.props.products) });
   }
 
-  addProduct = product => {
-    const products = {...this.state.products}
-    products[product.id] = product
-    this.setState({ products })
-  }
+  addProduct = productId => {
+    const products = this.state.products;
+    const cart = { ...this.state.cart };
 
-  changeShelf = (productID, newShelf) => {
-    ProductsAPI.update(productID, newShelf).then(r => {
-      if(newShelf !== 'none' && !r[newShelf].includes(productID)) return;
-      let products = {...this.state.products}
-      products[productID].shelf = newShelf
-      this.setState({ products })
-    })
-  }
+    if (Object.keys(cart).includes(productId)) return;
+    cart[productId] = { ...products[productId], quantity: 1 };
+
+    this.showAlert("The product has been added to the cart! ;)", "success");
+
+    this.setState({ cart });
+  };
+
+  onChangeProductQuantity = (productId, quantity) => {
+    const cart = { ...this.state.cart };
+    quantity = parseInt(quantity || 0);
+    cart[productId] = { ...cart[productId], quantity };
+
+    this.setState({ cart });
+  };
+
+  removeProduct = productId => {
+    const cart = { ...this.state.cart };
+
+    if (Object.keys(cart).includes(productId)) return;
+    delete cart[productId];
+    this.showAlert("The product has been removed of the card! ;)", "success");
+    this.setState({ cart });
+  };
+
+  handleCartOpen = isCartOpen => this.setState({ isCartOpen });
 
   render() {
+    const { cart, isCartOpen } = this.state;
+    const cartItensCount = Object.keys(cart).length;
+
     return (
       <div className="app">
-        <Route exact path="/" render={() =>
-          <ProductList changeShelf={this.changeShelf} products={this.state.products} />
-        } />
-        <Route path="/search" render={() =>
-          <Search addProduct={this.addProduct} shelfProducts={this.state.products}/>
-        } />
+        <div className="list-products">
+          <div className="list-products-title">
+            <h1>Awesome Shopping</h1>
+          </div>
+          <div>
+            <ProductList
+              cart={cart}
+              onAddProduct={this.addProduct}
+              onRemoveProduct={this.removeProduct}
+              products={this.state.products}
+            />
+            <Route
+              path="/cart"
+              render={({ history }) => (
+                <CartPopup
+                  onChangeProductQuantity={this.onChangeProductQuantity}
+                  onRemoveProduct={this.removeProduct}
+                  products={cart}
+                  handleCartOpen={this.handleCartOpen}
+                  history={history}
+                />
+              )}
+            />
+            <div className="product-cart">
+              {!isCartOpen &&
+                cartItensCount > 0 && (
+                  <div className="product-cart-count">{cartItensCount}</div>
+                )}
+              <Link
+                className={classNames({
+                  "ignore-react-onclickoutside": isCartOpen,
+                })}
+                to="/cart"
+              />
+            </div>
+          </div>
+        </div>
+        <AlertContainer ref={a => (this.msg = a)} {...this.alertOptions} />
       </div>
-    )
+    );
   }
 }
 
-export default ProductsApp
+export default App;

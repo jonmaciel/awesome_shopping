@@ -1,21 +1,51 @@
-import React from 'react'
-import SelectShelf from './SelectShelf'
+import React from "react";
+import { Money } from "react-format";
 
-export default ({id, authors, title, imageLinks, shelf, onChangeShlef}) =>
+export default ({
+  id,
+  price,
+  name,
+  img_url,
+  onAddProduct,
+  onRemoveProduct,
+  isInCartList,
+}) => (
   <div className="product">
     <div className="product-top">
       <div
         className="product-cover"
-        style={{ width: 128, height: 193, backgroundImage: `url("${imageLinks.smallThumbnail}")` }}
+        style={{
+          width: 128,
+          height: 193,
+          backgroundImage: `url("${img_url}")`,
+        }}
       />
-      <SelectShelf productId={id} onChangeShlef={onChangeShlef} selectedsShelf={shelf || ''} />
+      {isInCartList ? (
+        <a
+          className="product-remove"
+          href="#remove-product"
+          onClick={e => {
+            e.preventDefault();
+            onRemoveProduct(id);
+          }}
+        />
+      ) : (
+        <a
+          className="product-add"
+          href="#add-product"
+          onClick={e => {
+            e.preventDefault();
+            onAddProduct(id);
+          }}
+        />
+      )}
     </div>
-    <div className="product-title">{title}</div>
-    { Array.isArray(authors) ?
-        authors.map((author, i)=> <div key={i} className="product-authors">{author}</div>) :
-        <div className="product-authors">{authors}</div>
-    }
+    <div className="product-title">{name}</div>
+    <div className="product-price">
+      Price:
+      <Money locale="en-US" currency="USD">
+        {price}
+      </Money>
+    </div>
   </div>
-
-
-
+);

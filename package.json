@@ -1,17 +1,34 @@
 {
   "name": "awesome_shopping",
   "private": true,
+   "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "app/**/*.{js,es6,jsx}": [
+      "./node_modules/prettier/bin/prettier.js --trailing-comma es5 --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "babel-preset-react": "^6.24.1",
+    "classnames": "^2.2.5",
     "coffeescript": "1.12.7",
+    "flow": "^0.2.3",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-alert": "^2.4.0",
     "react-dom": "^16.0.0",
+    "react-format": "^1.2.0",
     "react-on-rails": "^10.0.0",
+    "react-onclickoutside": "^6.6.2",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.7.4",
     "webpack-dev-server": "^2.9.3"
   }
 }

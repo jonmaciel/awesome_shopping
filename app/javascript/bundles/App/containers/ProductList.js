@@ -1,48 +1,48 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import ProductShelf from '../components/ProductShelf'
-import * as ProductsAPI from '../ProductsAPI'
+// @flow
+import React, { Component } from "react";
+import Product from "../components/Product";
+import { ProductType } from "../types";
 
-const shelfTitle = {
-  currentlyReading: 'Currently Reading',
-  wantToRead: 'Want to Read',
-  read: 'Read',
-}
+type Props = {
+  handleCartOpen: () => void,
+  onChangeProductQuantity: () => void,
+  onRemoveProduct: () => void,
+  products?: Array<ProductType>,
+};
 
-class ProductList extends React.Component {
-  productsByShelf = (products) =>
-   Object.keys(shelfTitle).reduce((productsByShelf, shelf) => {
-       productsByShelf[shelf] = products.filter(product => product.shelf === shelf)
-       return productsByShelf;
-    }, {});
-
-
+class ProductList extends Component {
   renderProductList() {
-    if(!this.props.products) return(<span>Loading...</span>);
-    const productsByShelf = this.productsByShelf(Object.values(this.props.products))
-    return(
-      <div>
-        {Object.keys(productsByShelf).map((shelf, i) =>
-          <ProductShelf key={i} onChangeShlef={this.props.changeShelf} title={shelfTitle[shelf]} products={productsByShelf[shelf]} />
-        )}
-      </div>
-    )
+    const { products, cart, onAddProduct, onRemoveProduct } = this.props;
+    if (!this.props.products) return <span>No product found...</span>;
+
+    return (
+      <ol className="products-grid">
+        {Object.values(products).map((product, i) => (
+          <li key={i}>
+            <Product
+              {...product}
+              onAddProduct={onAddProduct}
+              onRemoveProduct={onRemoveProduct}
+              isInCartList={!!cart[product.id]}
+            />
+          </li>
+        ))}
+      </ol>
+    );
   }
 
   render() {
     return (
-      <div className="list-products">
-        <div className="list-products-title">
-          <h1>MyReads</h1>
-        </div>
-        <div className="list-products-content">
-          {this.renderProductList()}
-        </div>
-        <div className="open-search">
-          <Link to="/search">Add a product</Link>
+      <div className="list-products-content">
+        <div className="productshelf">
+          <h2 className="productshelf-title">Products</h2>
+          <div className="productshelf-products">
+            {this.renderProductList()}
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
-export default ProductList
+
+export default ProductList;

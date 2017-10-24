@@ -1,24 +1,26 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
 
-Things you may want to cover:
+    $ cd awesome_shopping
+    $ bundle install
+    $ rails g react_on_rails:install
+    $ bundle && npm install
 
-* Ruby version
 
-* System dependencies
+## Start & watch
 
-* Configuration
+    $ foreman start -f Procfile.dev
 
-* Database creation
+## On brwoser
 
-* Database initialization
+    $ Acess your localhost (http://localhost:3000/)
+    $ If you wanna check GraphQL stuff use `/graphiql` route (http://localhost:3000/graphiql)
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Links:
+* [Ruby - docs](http://ruby-doc.org/)
+* [Ruby On Rails - docs](http://guides.rubyonrails.org/)
+* [graphql-ruby - docs](http://graphql-ruby.org/development/)
+* [ES6 - docs](http://es6-features.org/)
+* [React JS - docs](https://facebook.github.io/react/docs/)
+* [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)

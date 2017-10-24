@@ -60,25 +60,46 @@ body, .app {
   text-align: center;
 }
 
-.open-search {
+.product-cart {
   position: fixed;
   right: 25px;
   bottom: 25px;
 }
-.open-search a {
+.cart-popup {
+  display: block;
+  overflow-y: scroll;
+  width: 80%;
+  height: 500px;
+  position: fixed;
+  background: white;
+  padding: 10px 20px;
+  right: 70px;
+  bottom: 70px;
+  box-shadow: 1px 3px 6px rgba(0,0,0,0.16), 1px 3px 6px rgba(0,0,0,0.23);
+}
+.product-cart a {
   display: block;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background: #2e7d32;
-  background-image: url('./icons/add.svg');
+  background-image: url('./icons/cart.svg');
+  color: white;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
 }
-
+.product-cart .product-cart-count {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 50%;
+  background: red;
+  color: white;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+}
 /* search page */
 
 .search-products-bar {
@@ -140,14 +161,20 @@ body, .app {
   width: 140px;
 }
 .product-title,
-.product-authors {
+.product-price,
+.product-quantity {
   font-size: 0.8em;
 }
 .product-title {
   margin-top: 10px;
 }
-.product-authors {
+.product-price {
   color: #999;
+}
+
+.product-quantity input {
+  width: 40px;
+  margin: 0 8px;
 }
 
 .product-top {
@@ -157,7 +184,7 @@ body, .app {
   align-items: flex-end;
 }
 
-.product-shelf-changer {
+.product-remove {
   position: absolute;
   right: 0;
   bottom: -10px;
@@ -165,17 +192,26 @@ body, .app {
   height: 40px;
   border-radius: 50%;
   background: #60ac5d;
-  background-image: url('./icons/arrow-drop-down.svg');
+  background-image: url('./icons/remove.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-.product-shelf-changer select {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+
+.product-add {
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #60ac5d;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 /* product cover */

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root 'index#index'
   get 'index/index'
+  get '/cart', to: 'index#index'
 
   post "/graphql", to: "graphql#execute"
   resources :products
