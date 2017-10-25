@@ -57,10 +57,18 @@ body,
   right: 25px;
   bottom: 25px;
 }
+
+@media (max-width: 800px) {
+  .cart-popup {
+    width: 70% !important;
+    margin: 20px !important;
+  }
+}
+
 .cart-popup {
   display: block;
   overflow-y: scroll;
-  width: 80%;
+  width: 700px;
   height: 500px;
   position: fixed;
   background: white;

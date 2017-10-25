@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'graphql'
+gem 'graphiql-rails'
 gem 'react_on_rails', '~> 9.0.1'
 gem 'mini_racer'
 gem 'foreman'

@@ -1,9 +1,9 @@
 // @flow
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import CartItem from "../components/CartItem";
-import { Money } from "react-format";
-import { ProductType } from "../types";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import CartItem from '../components/CartItem';
+import { Money } from 'react-format';
+import { ProductType } from '../types';
 
 type Props = {
   onChangeProductQuantity: () => void,
@@ -13,35 +13,37 @@ type Props = {
 };
 
 class Cart extends Component {
-  getTotals = () =>
-    Object.values(this.props.products).reduce(
-      (prices, product) => {
-        const price = product.price * product.quantity;
-        prices[product.id] = price;
-        prices.fullPrice += price;
-        prices.totalQuantity += product.quantity;
-        return prices;
+  getTotals = cartItems => {
+    const { products, cart } = this.props;
+    return cartItems.reduce(
+      (totals, productId) => {
+        const quantity = cart[productId].quantity;
+        totals.totalQuantity += quantity;
+        totals.fullPrice += products[productId].price * quantity;
+        return totals;
       },
       { fullPrice: 0, totalQuantity: 0 }
     );
+  };
 
   render() {
-    const products = Object.values(this.props.products);
-    if (!products.length)
+    const { products, cart } = this.props;
+    const cartItems = Object.keys(cart);
+    const { fullPrice, totalQuantity } = this.getTotals(cartItems);
+
+    if (!cartItems.length)
       return <strong className="empty-cart">Empty cart ;(</strong>;
 
-    const totals = this.getTotals();
-    const { fullPrice, totalQuantity } = totals;
     return (
       <div>
         <ol className="products-grid">
-          {products.map((product, i) => (
+          {cartItems.map((productId, i) => (
             <li key={i}>
               <CartItem
                 onChangeProductQuantity={this.props.onChangeProductQuantity}
                 onRemoveProduct={this.props.onRemoveProduct}
-                product={product}
-                totalPrice={totals[product.id]}
+                product={products[productId]}
+                quantity={cart[productId].quantity}
               />
             </li>
           ))}

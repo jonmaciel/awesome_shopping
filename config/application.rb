@@ -1,4 +1,6 @@
-require_relative 'boot'
+# frozen_string_literal: true
+
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -27,5 +29,7 @@ module AwesomeShopping
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.autoload_paths += Dir[Rails.root.join("app", "graphql", "**/")]
   end
 end

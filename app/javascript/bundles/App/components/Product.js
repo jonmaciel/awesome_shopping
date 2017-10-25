@@ -1,5 +1,5 @@
-import React from "react";
-import { Money } from "react-format";
+import React from 'react';
+import { Money } from 'react-format';
 
 export default ({
   id,
@@ -22,6 +22,8 @@ export default ({
       />
       {isInCartList ? (
         <a
+          title="Add product"
+          tabIndex="1"
           className="product-remove"
           href="#remove-product"
           onClick={e => {

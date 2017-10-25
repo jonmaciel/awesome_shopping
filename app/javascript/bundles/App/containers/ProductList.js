@@ -1,7 +1,7 @@
 // @flow
-import React, { Component } from "react";
-import Product from "../components/Product";
-import { ProductType } from "../types";
+import React, { Component } from 'react';
+import Product from '../components/Product';
+import { ProductType } from '../types';
 
 type Props = {
   handleCartOpen: () => void,
@@ -13,11 +13,11 @@ type Props = {
 class ProductList extends Component {
   renderProductList() {
     const { products, cart, onAddProduct, onRemoveProduct } = this.props;
-    if (!this.props.products) return <span>No product found...</span>;
+    if (!products.length) return <span>No product found...</span>;
 
     return (
       <ol className="products-grid">
-        {Object.values(products).map((product, i) => (
+        {products.map((product, i) => (
           <li key={i}>
             <Product
               {...product}

@@ -1,13 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import onClickOutside from "react-onclickoutside";
-import Cart from "./Cart";
-import { ProductType } from "../types";
+import React, { Component } from 'react';
+import onClickOutside from 'react-onclickoutside';
+import Cart from './Cart';
+import { ProductType } from '../types';
 
 type Props = {
   handleCartOpen: () => void,
   onChangeProductQuantity: () => void,
   onRemoveProduct: () => void,
+  cart: { [number]: number },
   products: { [number]: ProductType },
 };
 
@@ -17,7 +18,7 @@ class CartPopup extends Component<Props> {
   }
 
   handleClickOutside() {
-    this.props.history.push("/");
+    this.props.history.push('/');
     this.props.handleCartOpen(false);
   }
 
@@ -29,6 +30,7 @@ class CartPopup extends Component<Props> {
           onChangeProductQuantity={this.props.onChangeProductQuantity}
           onRemoveProduct={this.props.onRemoveProduct}
           products={this.props.products}
+          cart={this.props.cart}
         />
       </div>
     );

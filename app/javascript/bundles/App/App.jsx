@@ -1,13 +1,13 @@
 // @flow
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import ProductList from "./containers/ProductList";
-import CartPopup from "./containers/CartPopup";
-import AlertContainer from "react-alert";
-import classNames from "classnames";
-import { Link } from "react-router-dom";
-import { ProductType } from "./types";
-import { normalizeById } from "./helpers";
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import ProductList from './containers/ProductList';
+import CartPopup from './containers/CartPopup';
+import AlertContainer from 'react-alert';
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { ProductType } from './types';
+import { normalizeById } from './helpers';
 
 type Props = {
   products: Array<ProductType>,
@@ -19,16 +19,19 @@ class App extends Component<Pros> {
 
   alertOptions = {
     offset: 3,
-    position: "top right",
-    theme: "light",
+    position: 'top right',
+    theme: 'light',
     time: 3000,
-    transition: "scale",
+    transition: 'scale',
   };
 
   showAlert = (msg, type) => this.msg.show(msg, { type });
 
   componentWillMount() {
-    this.setState({ products: normalizeById(this.props.products) });
+    this.setState({
+      products: normalizeById(this.props.products),
+      cart: normalizeById(this.props.cart, 'productId'),
+    });
   }
 
   addProduct = productId => {
@@ -38,15 +41,7 @@ class App extends Component<Pros> {
     if (Object.keys(cart).includes(productId)) return;
     cart[productId] = { ...products[productId], quantity: 1 };
 
-    this.showAlert("The product has been added to the cart! ;)", "success");
-
-    this.setState({ cart });
-  };
-
-  onChangeProductQuantity = (productId, quantity) => {
-    const cart = { ...this.state.cart };
-    quantity = parseInt(quantity || 0);
-    cart[productId] = { ...cart[productId], quantity };
+    this.showAlert('The product has been added to the cart! ;)', 'success');
 
     this.setState({ cart });
   };
@@ -56,14 +51,23 @@ class App extends Component<Pros> {
 
     if (Object.keys(cart).includes(productId)) return;
     delete cart[productId];
-    this.showAlert("The product has been removed of the card! ;)", "success");
+    this.showAlert('The product has been removed of the card! ;)', 'success');
+    this.setState({ cart });
+  };
+
+  onChangeProductQuantity = (productId, quantity) => {
+    const cart = { ...this.state.cart };
+    quantity = parseInt(quantity || 0);
+
+    cart[productId] = { ...cart[productId], quantity };
+
     this.setState({ cart });
   };
 
   handleCartOpen = isCartOpen => this.setState({ isCartOpen });
 
   render() {
-    const { cart, isCartOpen } = this.state;
+    const { cart, isCartOpen, products } = this.state;
     const cartItensCount = Object.keys(cart).length;
 
     return (
@@ -77,7 +81,7 @@ class App extends Component<Pros> {
               cart={cart}
               onAddProduct={this.addProduct}
               onRemoveProduct={this.removeProduct}
-              products={this.state.products}
+              products={Object.values(products)}
             />
             <Route
               path="/cart"
@@ -85,7 +89,8 @@ class App extends Component<Pros> {
                 <CartPopup
                   onChangeProductQuantity={this.onChangeProductQuantity}
                   onRemoveProduct={this.removeProduct}
-                  products={cart}
+                  products={products}
+                  cart={cart}
                   handleCartOpen={this.handleCartOpen}
                   history={history}
                 />
@@ -98,7 +103,7 @@ class App extends Component<Pros> {
                 )}
               <Link
                 className={classNames({
-                  "ignore-react-onclickoutside": isCartOpen,
+                  'ignore-react-onclickoutside': isCartOpen,
                 })}
                 to="/cart"
               />

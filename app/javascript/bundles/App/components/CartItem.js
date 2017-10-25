@@ -1,12 +1,12 @@
-import React from "react";
-import Product from "./Product";
-import { Money } from "react-format";
+import React from 'react';
+import Product from './Product';
+import { Money } from 'react-format';
 
 export default ({
   product,
-  totalPrice,
   onRemoveProduct,
   onChangeProductQuantity,
+  quantity,
 }) => (
   <div>
     <Product
@@ -18,17 +18,18 @@ export default ({
       Quantity:
       <input
         min="1"
+        tabIndex="2"
         onChange={e => onChangeProductQuantity(product.id, e.target.value)}
         onBlur={e => {
           if (e.target.value <= 0) onChangeProductQuantity(product.id, 1);
         }}
         type="number"
-        value={product.quantity}
+        value={quantity}
       />
     </div>
     Total:
     <Money locale="en-US" currency="USD">
-      {totalPrice}
+      {product.price * quantity}
     </Money>
   </div>
 );
