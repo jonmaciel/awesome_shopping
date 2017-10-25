@@ -167,6 +167,8 @@ GEM
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
+    rspec-graphql_matchers (0.7.1)
+      graphql (>= 0.9, < 2)
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
@@ -260,6 +262,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   react_on_rails (~> 9.0.1)
+  rspec-graphql_matchers
   rspec-rails (~> 3.6)
   rubocop
   sass-rails (~> 5.0)

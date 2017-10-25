@@ -2,9 +2,9 @@
 
 Types::QueryType = GraphQL::ObjectType.define do
   name "Query"
-  field :getCart, types.String do
+  field :getCart do
     description "Set Car Cookie"
-    type types[CartItemInputType]
+    type types[ProductType]
     resolve ->(obj, args, ctx) {
       cart = ctx[:cookies][:cart]
       cart ? JSON.parse(cart) : []

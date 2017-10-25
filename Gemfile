@@ -42,6 +42,7 @@ group :test do
   gem 'factory_girl_rails', :require => false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
+  gem 'rspec-graphql_matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
