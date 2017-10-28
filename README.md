@@ -6,7 +6,9 @@ Ruby On Rails + GraphQL + ReactJS with ES6
     $ git clone git@github.com:jonmaciel/awesome_shopping.git
     $ cd awesome_shopping
     $ bundle && npm install
-    $ bin/rake db:setup
+    
+    Configure `database.yml` with your db credentials, and run:
+    $ bin/rake db:setup
     $ bin/rake db:migrate
     $ bin/rake db:seed
 
