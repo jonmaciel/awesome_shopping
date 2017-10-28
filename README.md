@@ -5,8 +5,6 @@ Ruby On Rails + GraphQL + ReactJS with ES6
 
     $ git clone git@github.com:jonmaciel/awesome_shopping.git
     $ cd awesome_shopping
-    $ bundle install
-    $ rails g react_on_rails:install
     $ bundle && npm install
     $ bin/rake db:setup
     $ bin/rake db:migrate
