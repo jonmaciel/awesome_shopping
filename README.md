@@ -1,13 +1,13 @@
 
-Ruby On Rails + GraphQL + ReactJS with ES6
+Ruby On Rails + GraphQL + ReactJS with ES6 + postgres
 
 ## Install
 
     $ git clone git@github.com:jonmaciel/awesome_shopping.git
     $ cd awesome_shopping
     $ bundle && npm install
-    Configure `database.yml` with your db credentials, and run:
-    $ bin/rake db:setup
+    Configure `database.yml` with your db credentials, and run:
+    $ bin/rake db:setup
     $ bin/rake db:migrate
     $ bin/rake db:seed
 
@@ -33,8 +33,6 @@ Ruby On Rails + GraphQL + ReactJS with ES6
     if you are using linux, you can install it via npm:
     $ sudo npm -g install chromedriver
     $ ln -sf /usr/lib/node_modules/chromedriver/lib/chromedriver/chromedriver ~/bin/chromedriver
-    
-Note: if you use macOS and have uptaded for the newest version, you should install Homebrew again - without uinstalling the previous, to fixe permissions issues.
 
 ### Feature test scripts:
     $ cd awesome_shopping
