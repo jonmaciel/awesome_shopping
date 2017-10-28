@@ -8,6 +8,9 @@ Ruby On Rails + GraphQL + ReactJS with ES6
     $ bundle install
     $ rails g react_on_rails:install
     $ bundle && npm install
+    $ bin/rake db:setup
+    $ bin/rake db:migrate
+    $ bin/rake db:seed
 
 Note: if you use macOS and have uptaded for the newest version, you should install Homebrew again - without uinstalling the previous, to fixe permissions issues.
 ## Start & watch
