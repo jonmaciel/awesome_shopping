@@ -1,6 +1,7 @@
 
 ## Install
 
+    $ git clone git@github.com:jonmaciel/awesome_shopping.git
     $ cd awesome_shopping
     $ bundle install
     $ rails g react_on_rails:install
@@ -12,13 +13,13 @@ Note: if you use macOS and have uptaded for the newest version, you should insta
     $ foreman start -f Procfile.dev
     OR
     $ rails s
-    $ in another terminal and run:
+    in another terminal and run:
     $ webpack -d --watch
 
 ## On brwoser
 
-    $ Acess your localhost (http://localhost:3000/)
-    $ If you wanna check GraphQL stuff use `/graphiql` route (http://localhost:3000/graphiql)
+    Acess your localhost (http://localhost:3000/)
+    If you wanna check GraphQL stuff use `/graphiql` route (http://localhost:3000/graphiql)
 
 ## Testing
     $ firstly, run `webpack -d --watch` to compile js bundle :D
