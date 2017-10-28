@@ -8,8 +8,6 @@ Ruby On Rails + GraphQL + ReactJS with ES6 + postgres
     $ bundle && npm install
     Configure `database.yml` with your db credentials, and run:
     $ bin/rake db:setup
-    $ bin/rake db:migrate
-    $ bin/rake db:seed
 
 ## Start & watch
 
