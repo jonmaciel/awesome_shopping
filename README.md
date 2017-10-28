@@ -1,4 +1,6 @@
 
+Ruby On Rails + GraphQL + ReactJS with ES6
+
 ## Install
 
     $ git clone git@github.com:jonmaciel/awesome_shopping.git
@@ -30,6 +32,12 @@ Note: if you use macOS and have uptaded for the newest version, you should insta
     if you are using linux, you can install it via npm:
     $ sudo npm -g install chromedriver
     $ ln -sf /usr/lib/node_modules/chromedriver/lib/chromedriver/chromedriver ~/bin/chromedriver
+
+### Feature test scripts:
+    $ cd awesome_shopping
+    $ rspec ./spec/features/special_behaviour.rb
+    $ rspec ./spec/features/cart/engine.rb
+
 
 ### Links:
 * [Ruby - docs](http://ruby-doc.org/)
