@@ -25,7 +25,7 @@ Note: if you use macOS and have uptaded for the newest version, you should insta
 
 ## Testing
     Firstly, run
-    $ `webpack -d --watch`
+    $ `bin/webpack`
     You'll need of `chromedriver` to capybara tests
     so, if you are using macOS, just run
     $ brew install chromedriver
