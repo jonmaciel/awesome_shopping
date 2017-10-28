@@ -28,8 +28,10 @@ export default ({
       />
     </div>
     Total:
-    <Money locale="en-US" currency="USD">
-      {product.price * quantity}
-    </Money>
+    <div className="item-price">
+      <Money locale="en-US" currency="USD">
+        {product.price * quantity}
+      </Money>
+    </div>
   </div>
 );

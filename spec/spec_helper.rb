@@ -16,8 +16,9 @@ RSpec.configure do |config|
   # Database Cleaner config
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    Rails.application.load_seed
   end
+
   config.before(:each) do
-    DatabaseCleaner.clean_with(:truncation)
   end
 end

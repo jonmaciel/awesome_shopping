@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import { Money } from 'react-format';
 import { ProductType } from '../types';
@@ -50,11 +49,11 @@ class Cart extends Component {
         </ol>
         {fullPrice > 0 && (
           <div className="full-price">
-            <div>
+            <div className="total-quantity">
               <strong>Itens quantity:</strong>
               {totalQuantity}
             </div>
-            <div>
+            <div className="total-price">
               <strong>Total: </strong>
               <Money locale="en-US" currency="USD">
                 {fullPrice}

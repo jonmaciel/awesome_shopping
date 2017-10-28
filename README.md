@@ -6,7 +6,7 @@
     $ rails g react_on_rails:install
     $ bundle && npm install
 
-
+Note: if you use macOS and have uptaded for the newest version, you should install Homebrew again - without uinstalling the previous, to fixe permissions issues.
 ## Start & watch
 
     $ foreman start -f Procfile.dev
@@ -16,6 +16,16 @@
     $ Acess your localhost (http://localhost:3000/)
     $ If you wanna check GraphQL stuff use `/graphiql` route (http://localhost:3000/graphiql)
 
+## Testing
+
+    $$ You'll need of `chromedriver` to capybara tests
+    $$ so, if you are using macOS, just run `brew install chromedriver`
+    $$ if you are using linux, you can install it via npm:
+    $$ $ sudo npm -g install chromedriver
+    $$ $ ln -sf /usr/lib/node_modules/chromedriver/lib/chromedriver/chromedriver ~/bin/chromedriver
+```
+
+
 
 ### Links:
 * [Ruby - docs](http://ruby-doc.org/)
@@ -24,3 +34,4 @@
 * [ES6 - docs](http://es6-features.org/)
 * [React JS - docs](https://facebook.github.io/react/docs/)
 * [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
+

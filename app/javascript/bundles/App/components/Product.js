@@ -17,12 +17,12 @@ export default ({
         style={{
           width: 128,
           height: 193,
-          backgroundImage: `url("${img_url}")`,
+          backgroundImage: img_url ? `url("${img_url}")` : '',
         }}
       />
       {isInCartList ? (
         <a
-          title="Add product"
+          title={name}
           tabIndex="1"
           className="product-remove"
           href="#remove-product"
@@ -33,6 +33,7 @@ export default ({
         />
       ) : (
         <a
+          title={name}
           className="product-add"
           href="#add-product"
           onClick={e => {
@@ -45,9 +46,11 @@ export default ({
     <div className="product-title">{name}</div>
     <div className="product-price">
       Price:
-      <Money locale="en-US" currency="USD">
-        {price}
-      </Money>
+      <div className="product-price">
+        <Money locale="en-US" currency="USD">
+          {price}
+        </Money>
+      </div>
     </div>
   </div>
 );

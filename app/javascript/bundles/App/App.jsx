@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ProductType } from './types';
 import { normalizeById } from './helpers';
+import setCartMutation from './setCartMutation';
 
 type Props = {
   products: Array<ProductType>,
@@ -18,10 +19,10 @@ class App extends Component<Pros> {
   state = { products: {}, cart: {}, isCartOpen: false };
 
   alertOptions = {
-    offset: 3,
+    offset: 0,
     position: 'top right',
     theme: 'light',
-    time: 3000,
+    time: 1000,
     transition: 'scale',
   };
 
@@ -39,10 +40,10 @@ class App extends Component<Pros> {
     const cart = { ...this.state.cart };
 
     if (Object.keys(cart).includes(productId)) return;
-    cart[productId] = { ...products[productId], quantity: 1 };
+    cart[productId] = { productId, quantity: 1 };
 
     this.showAlert('The product has been added to the cart! ;)', 'success');
-
+    setCartMutation({ cart: Object.values(cart) });
     this.setState({ cart });
   };
 
@@ -52,6 +53,7 @@ class App extends Component<Pros> {
     if (Object.keys(cart).includes(productId)) return;
     delete cart[productId];
     this.showAlert('The product has been removed of the card! ;)', 'success');
+    setCartMutation({ cart: Object.values(cart) });
     this.setState({ cart });
   };
 
@@ -60,7 +62,7 @@ class App extends Component<Pros> {
     quantity = parseInt(quantity || 0);
 
     cart[productId] = { ...cart[productId], quantity };
-
+    setCartMutation({ cart: Object.values(cart) });
     this.setState({ cart });
   };
 
@@ -102,7 +104,7 @@ class App extends Component<Pros> {
                   <div className="product-cart-count">{cartItensCount}</div>
                 )}
               <Link
-                className={classNames({
+                className={classNames('open-cart-popup', {
                   'ignore-react-onclickoutside': isCartOpen,
                 })}
                 to="/cart"

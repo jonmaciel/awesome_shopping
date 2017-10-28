@@ -8,7 +8,11 @@ SetCartMutation = GraphQL::Relay::Mutation.define do
   return_field :success, types.Boolean
 
   resolve ->(obj, args, ctx) {
-    ctx[:cookies].permanent[:cart] = JSON.generate(args.to_h["cart"])
+    ctx[:cookies][:cart] = {
+      value:  JSON.generate(args.to_h["cart"]),
+      expires: 48.hour.from_now
+    }
+
     { success: ctx[:cookies][:cart].present? }
   }
 end

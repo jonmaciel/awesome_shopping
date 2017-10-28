@@ -1,13 +1,13 @@
 {
   "name": "awesome_shopping",
   "private": true,
-   "scripts": {
+  "scripts": {
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "app/**/*.{js,es6,jsx,scss,css}": [
-    "./node_modules/prettier/bin/prettier.js --single-quote --trailing-comma es5 --write",
-    "git add"
+      "./node_modules/prettier/bin/prettier.js --single-quote --trailing-comma es5 --write",
+      "git add"
     ],
     "{app,test}/**/*.rb": [
       "bundle exec rubocop -a",
@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
     "coffeescript": "1.12.7",
     "flow": "^0.2.3",
+    "graphql-fetch": "^1.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-alert": "^2.4.0",
