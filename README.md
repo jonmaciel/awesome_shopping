@@ -10,6 +10,10 @@ Note: if you use macOS and have uptaded for the newest version, you should insta
 ## Start & watch
 
     $ foreman start -f Procfile.dev
+    OR
+    $ rails s
+    $ in another terminal and run:
+    $ webpack -d --watch
 
 ## On brwoser
 
@@ -17,15 +21,12 @@ Note: if you use macOS and have uptaded for the newest version, you should insta
     $ If you wanna check GraphQL stuff use `/graphiql` route (http://localhost:3000/graphiql)
 
 ## Testing
-
+    $ firstly, run `webpack -d --watch` to compile js bundle :D
     $$ You'll need of `chromedriver` to capybara tests
     $$ so, if you are using macOS, just run `brew install chromedriver`
     $$ if you are using linux, you can install it via npm:
     $$ $ sudo npm -g install chromedriver
     $$ $ ln -sf /usr/lib/node_modules/chromedriver/lib/chromedriver/chromedriver ~/bin/chromedriver
-```
-
-
 
 ### Links:
 * [Ruby - docs](http://ruby-doc.org/)
